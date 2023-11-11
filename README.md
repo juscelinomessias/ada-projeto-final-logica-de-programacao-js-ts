@@ -1,1 +1,1 @@
-# ada-projeto-final-logica-de-programacao-js-ts
+# Projeto final, módulo lógica de programação
