@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto - Lista de tarefas</title>
+</head>
+
+<body>
+    <h1>Lista de tarefas</h1>
+    <br>
+
+    <!-- ADICIONAR -->
+    <label for="adicionarTarefa">Nova tarefa:</label>
+    <input type="text" id="adicionarTarefa" autofocus placeholder="ex: fazer compras">
+    <button type="submit" id="btn" onclick="limparInputs();adicionarTarefa()">Adicionar na lista</button>
+    <p id="descricaoAdicionarTarefa"></p>
+    <br>
+
+    <!-- PESQUISAR UMA TAREFA -->
+    <label for="obterUmaTarefa">Obter uma tarefa pelo número:</label>
+    <input type="number" id="obterUmaTarefa" autofocus placeholder="ex: 1">
+    <button type="submit" id="btn" onclick="limparInputs();obterUmaTarefa()">Pesquisar</button>
+    <p id="descricaoObterUmaTarefa"></p>
+    <br>
+
+    <!-- EDITAR -->
+    <label for="editarTarefa">Editar uma tarefa pelo número:</label>
+    <input type="number" id="pesquisaEditarTarefa" autofocus placeholder="ex: 1">
+    <!-- <button type="submit" onclick="editarTarefa()">Pesquisar</button> -->
+    <p id="descricaoPesquisaEditarTarefa"></p>
+    <label for="editarTarefa">Nova descrição:</label>
+    <input type="text" id="editarTarefa" autofocus placeholder="ex: ir ao banco">
+    <button type="submit" id="btn" onclick="limparInputs();editarTarefa()">Editar</button>
+    <p id="descricaoEditarTarefa"></p>
+    <br>
+
+    <!-- DELETAR -->
+    <label for="deletarTarefa">Excluir uma tarefa da lista através do número:</label>
+    <input type="number" id="deletarTarefa" autofocus placeholder="ex: 1">
+    <button type="submit" id="btn" onclick="limparInputs();deletarTarefa()">Deletar</button>
+    <p id="descricaoDeletarTarefa"></p>
+    <br>
+
+    <!-- MOSTRAR LISTA -->
+    <button type="submit" onclick="obterTodasAsTarefas()">Visualizar lista</button>
+    <button type="submit" onclick="deletarTodasAsTarefas()">Deletar todas as tarefas</button>
+    <button type="reset" id="btn" onclick="limparInputs()">Limpar campos</button>
+    <h3 id="tituloLista"></h3>
+    <pre id="lista"></pre>
+
+    <script src="projeto-final.js"></script>
+</body>
+
+</html>
