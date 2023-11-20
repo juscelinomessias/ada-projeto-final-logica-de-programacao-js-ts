@@ -34,7 +34,6 @@ do {
             if (listaDeTarefas.length === 0) {
                 console.log(`> Não existem tarefas cadastradas.`);
             } else {
-                obterTodasAsTarefas();
                 numeroTarefa = parseInt(prompt("- Digite o número da tarefa: "));
                 obterUmaTarefa(numeroTarefa);
             }
