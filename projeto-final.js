@@ -165,11 +165,7 @@ do {
             break;
 
         case 3:
-            if (listaDeTarefas.length === 0) {
-                console.log(`> Não existem tarefas cadastradas.`);
-            } else {
-                obterTodasAsTarefas();
-            }
+            listaDeTarefas.length === 0 ? console.log(`> Não existem tarefas cadastradas.`) : obterTodasAsTarefas();
             break;  
         
         case 4:
