@@ -1,6 +1,10 @@
+const fs = require('fs');
 const prompt = require('prompt-sync')();
 
-const listaDeTarefas = []
+let listaDeTarefas = [];
+
+
+carregarTarefasDoArquivo();
 
 let opcaoMenu;
 let tarefa;
@@ -15,12 +19,33 @@ const obterTodasAsTarefas = () => {
     }
 };
 
+salvarTarefasNoArquivo();
+function carregarTarefasDoArquivo() {
+    try {
+        const dados = fs.readFileSync('tarefas.json', 'utf8');
+        listaDeTarefas = JSON.parse(dados);
+    } catch (err) {
+        console.log('Erro ao carregar tarefas do arquivo:', err.message);
+    }
+}
+
+function salvarTarefasNoArquivo() {
+    try {
+        const dados = JSON.stringify(listaDeTarefas, null, 2);
+        fs.writeFileSync('tarefas.json', dados);
+    } catch (err) {
+        console.log('Erro ao salvar tarefas no arquivo:', err.message);
+    }
+}
+
 function adicionarTarefa(tarefa) {
     try {
         verificarTarefa(tarefa);
         listaDeTarefas.push(tarefa);
         console.log(`> Tarefa adicionada com sucesso.`);      
         obterTodasAsTarefas();
+
+        salvarTarefasNoArquivo();
 
     } catch (e) {
         console.error({"name": e.name,
@@ -51,6 +76,8 @@ function editarTarefa(numeroTarefa) {
         console.log(`> Tarefa modificada com sucesso.`);
         obterTodasAsTarefas();
 
+        salvarTarefasNoArquivo();
+
     } catch (e) {
         console.error({"name": e.name,
                        "mensagem": e.message,
@@ -63,6 +90,8 @@ function deletarPrimeiraTarefa() {
         listaDeTarefas.shift();
         console.log(`> Tarefa removida com sucesso.`);
         obterTodasAsTarefas();
+
+        salvarTarefasNoArquivo();
         
     } catch (e) {
         console.error({"name": e.name,
@@ -82,6 +111,8 @@ function deletarTarefa(numeroTarefa) {
         } else {
             obterTodasAsTarefas();
         }
+
+        salvarTarefasNoArquivo();
         
     } catch (e) {
         console.error({"name": e.name,
@@ -95,6 +126,8 @@ function removerTodasTarefas(){
         listaDeTarefas.pop();
     }
     console.log(`> Todas as tarefas foram deletadas.`)
+
+    salvarTarefasNoArquivo();
 }
 
 function verificarSeValorEValidoETarefaExiste(numeroTarefa) {
@@ -158,6 +191,7 @@ do {
                 console.log(`> Não existem tarefas cadastradas.`);
             } else {
                 obterTodasAsTarefas();
+                console.log(``);
                 numeroTarefa = parseInt(prompt("- Digite o número da tarefa: "));
                 obterUmaTarefa(numeroTarefa);
             }
@@ -172,6 +206,7 @@ do {
                 console.log(`> Não existem tarefas cadastradas.`);
             } else {
                 obterTodasAsTarefas();
+                console.log(``);
                 numeroTarefa = parseInt(prompt("- Digite o número da tarefa: "));
                 editarTarefa(numeroTarefa);            
             }
@@ -190,6 +225,7 @@ do {
                 console.log(`> Não existem tarefas cadastradas.`);
             } else {
                 obterTodasAsTarefas();
+                console.log(``);
                 numeroTarefa = parseInt(prompt("- Digite o número da tarefa: "));
                 deletarTarefa(numeroTarefa);
             }
