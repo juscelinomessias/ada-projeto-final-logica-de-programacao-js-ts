@@ -90,7 +90,12 @@ function deletarTarefa(numeroTarefa) {
     }    
 }
 
-
+function removerTodasTarefas(){
+    while (listaDeTarefas.length > 0) {
+        listaDeTarefas.pop();
+    }
+    console.log(`> Todas as tarefas foram deletadas.`)
+}
 
 function verificarSeValorEValidoETarefaExiste(numeroTarefa) {
     if(isNaN(numeroTarefa)){
@@ -101,7 +106,6 @@ function verificarSeValorEValidoETarefaExiste(numeroTarefa) {
         throw new Error(`> Tarefa não localizada.`);
     }         
 }
-
 
 function verificarTarefa(tarefa) {
     if(!tarefa){
@@ -123,12 +127,7 @@ function verificarTarefa(tarefa) {
     }
 }
 
-function removerTodasTarefas(){
-    while (listaDeTarefas.length > 0) {
-        listaDeTarefas.pop();
-    }
-    console.log(`> Todas as tarefas foram deletadas.`)
-}
+
 
 do {
     console.log(`
@@ -203,6 +202,7 @@ do {
                 removerTodasTarefas();
             }
             break;
+            
         case 0:
             console.log(`> Programa finalizado.`);
             break;  
