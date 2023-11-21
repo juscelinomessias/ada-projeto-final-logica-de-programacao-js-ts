@@ -18,6 +18,7 @@ do {
     4 - Editar tarefa.
     5 - Deletar a primeira tarefa.
     6 - Deletar um tarefa específica.
+    7 - Deletar todas as tarefas.
     0 - Sair.
     ---------------------------------
     `);
@@ -34,6 +35,7 @@ do {
             if (listaDeTarefas.length === 0) {
                 console.log(`> Não existem tarefas cadastradas.`);
             } else {
+                obterTodasAsTarefas();
                 numeroTarefa = parseInt(prompt("- Digite o número da tarefa: "));
                 obterUmaTarefa(numeroTarefa);
             }
@@ -75,6 +77,13 @@ do {
             }
             break;
 
+        case 7:
+            if (listaDeTarefas.length === 0) {
+                console.log(`> Não existem tarefas cadastradas.`);
+            } else {
+                removerTodasTarefas();
+            }
+            break;
         case 0:
             console.log(`> Programa finalizado.`);
             break;  
@@ -213,4 +222,11 @@ function verificarTarefa(tarefa) {
     if(tarefaExiste){
         throw new Error(`> Esta tarefa já está cadastrada.`);
     }
+}
+
+function removerTodasTarefas(){
+    while (listaDeTarefas.length > 0) {
+        listaDeTarefas.pop();
+    }
+    console.log(`> Todas as tarefas foram deletadas.`)
 }
