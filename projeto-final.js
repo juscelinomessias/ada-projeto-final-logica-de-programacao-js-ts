@@ -3,23 +3,14 @@ const prompt = require('prompt-sync')();
 
 let listaDeTarefas = [];
 
-
-carregarTarefasDoArquivo();
-
 let opcaoMenu;
 let tarefa;
 let numeroTarefa;
 
-const obterTodasAsTarefas = () => {
-    console.log(``);
-    console.log(`- Tarefas cadastradas:`);
-
-    for (let i = 0; i < listaDeTarefas.length; i++) {
-        console.log(`${i + 1} - ${listaDeTarefas[i]}`);
-    }
-};
+carregarTarefasDoArquivo();
 
 salvarTarefasNoArquivo();
+
 function carregarTarefasDoArquivo() {
     try {
         const dados = fs.readFileSync('tarefas.json', 'utf8');
@@ -67,6 +58,15 @@ function obterUmaTarefa(numeroTarefa) {
     }
 }
 
+const obterTodasAsTarefas = () => {
+    console.log(``);
+    console.log(`- Tarefas cadastradas:`);
+
+    for (let i = 0; i < listaDeTarefas.length; i++) {
+        console.log(`${i + 1} - ${listaDeTarefas[i]}`);
+    }
+};
+
 function editarTarefa(numeroTarefa) {  
     try {   
         verificarSeValorEValidoETarefaExiste(numeroTarefa);
@@ -106,7 +106,11 @@ function deletarTarefa(numeroTarefa) {
         listaDeTarefas.splice(numeroTarefa - 1, 1);
         console.log(`> Tarefa removida com sucesso.`);
 
-        listaDeTarefas.length === 0 ? console.log(`> Não existem tarefas cadastradas.`) : obterTodasAsTarefas();
+        if(listaDeTarefas.length === 0) {
+            console.log(`> Não existem tarefas cadastradas.`);
+        } else {
+            obterTodasAsTarefas();
+        }
     
         salvarTarefasNoArquivo();
         
@@ -177,43 +181,62 @@ do {
     opcaoMenu = parseInt(prompt("Digite o número da opção desejada: "));
 
     switch (opcaoMenu) {
-        
         case 1:
-                tarefa = prompt("- Digite uma tarefa: ");
-                adicionarTarefa(tarefa);
+            tarefa = prompt("- Digite uma tarefa: ");
+            adicionarTarefa(tarefa);
             break;
-
+        
         case 2:
+            if (listaDeTarefas.length === 0) {
+                console.log(`> Não existem tarefas cadastradas.`);
+            } else {
                 obterTodasAsTarefas();
                 console.log(``);
                 numeroTarefa = parseInt(prompt("- Digite o número da tarefa: "));
                 obterUmaTarefa(numeroTarefa);
+            }
             break;
 
         case 3:
-                obterTodasAsTarefas();
+            listaDeTarefas.length === 0 ? console.log(`> Não existem tarefas cadastradas.`) : obterTodasAsTarefas();
             break;  
         
         case 4:
+            if (listaDeTarefas.length === 0) {
+                console.log(`> Não existem tarefas cadastradas.`);
+            } else {
                 obterTodasAsTarefas();
                 console.log(``);
                 numeroTarefa = parseInt(prompt("- Digite o número da tarefa: "));
-                editarTarefa(numeroTarefa);        
+                editarTarefa(numeroTarefa); 
+             }       
             break; 
 
         case 5:
+            if (listaDeTarefas.length === 0) {
+                console.log(`> Não existem tarefas cadastradas.`);
+            } else {
                 deletarPrimeiraTarefa();
+            }
             break;
 
         case 6:
+            if (listaDeTarefas.length === 0) {
+                console.log(`> Não existem tarefas cadastradas.`);
+            } else {            
                 obterTodasAsTarefas();
                 console.log(``);
                 numeroTarefa = parseInt(prompt("- Digite o número da tarefa: "));
                 deletarTarefa(numeroTarefa);
+            }
             break;
 
         case 7:
+            if (listaDeTarefas.length === 0) {
+                console.log(`> Não existem tarefas cadastradas.`);
+            } else {
                 removerTodasTarefas();
+            }
             break;
             
         case 0:
@@ -227,10 +250,3 @@ do {
     }
 
 } while (opcaoMenu != 0);
-
-
-
-
-
-
-
