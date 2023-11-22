@@ -64,3 +64,8 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
     </td>  
   </tr>
 </table>
+
+### ❤️ Resultado final
+https://github.com/juscelinomessias/ada-projeto-final-logica-de-programacao-js-ts/assets/20049294/d178f86f-32a1-42d3-879a-87f3b3445467
+
+
